@@ -7,6 +7,13 @@ TagManager:
   - Fire
   - EnterBasketUI
   - BurnRope
+  - Floor
+  - CloudDensityStone
+  - CloudHeightStone
+  - WindDirectionStone
+  - WindForceStone
+  - SunStone
+  - StartStone
   layers:
   - Default
   - TransparentFX

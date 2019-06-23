@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class InputStoneScript : MonoBehaviour
 {
-    public float pickupRange;
+    public float pickupRange = 2.2f;
+
 
     public bool isPickedUp;
     public bool isPlaced;
+    bool ableToPickup;
 
     GameObject player;
     GameObject rightHand;
@@ -30,19 +32,23 @@ public class InputStoneScript : MonoBehaviour
             if (lookCheck.stoneHit)
             {
                 stonePickupImage.SetActive(!isPickedUp);
+                ableToPickup = true;
             }
             else
             {
                 stonePickupImage.SetActive(false);
+                ableToPickup = false;
             }
+
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                if (!isPickedUp)
+                if (!isPickedUp && lookCheck.stoneHit)
                 {
                     transform.position = rightHand.GetComponent<Transform>().position;
                     GetComponent<Collider>().enabled = false;
                     GetComponent<Rigidbody>().isKinematic = true;
                     transform.SetParent(rightHand.GetComponent<Transform>());
+                    transform.rotation = rightHand.transform.rotation;
                     isPlaced = false;
                     isPickedUp = true;
                 }
@@ -51,7 +57,7 @@ public class InputStoneScript : MonoBehaviour
                     if (lookCheck.windterfaceHit)
                     {
                         transform.SetParent(windterface.GetComponent<Transform>());
-                        transform.position = windterface.GetComponent<Transform>().position + new Vector3(0,0.3f,0);
+                        transform.position = windterface.GetComponent<Transform>().position + new Vector3(0, 0.3f, 0);
                         transform.rotation = windterface.GetComponent<Transform>().rotation;
                         isPlaced = true;
                         isPickedUp = false;

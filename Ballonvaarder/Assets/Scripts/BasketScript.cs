@@ -44,10 +44,7 @@ public class BasketScript : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    player.GetComponent<CharacterController>().enabled = false;
-                    playerStartPos = transform.position;
                     EnterBasket();
-                    player.GetComponent<CharacterController>().enabled = true;
                 }
             }
         }
@@ -60,7 +57,7 @@ public class BasketScript : MonoBehaviour
         /*
         if (clicking)
         {
-
+            playerStartPos = transform.position;
             float recallSpeedCounter = 1 / basketEnterSpeed;
             while (recallSpeedCounter < 1)
             {
@@ -77,9 +74,11 @@ public class BasketScript : MonoBehaviour
 
     void EnterBasket()
     {
+        player.GetComponent<CharacterController>().enabled = false;
         inBasket = true;
         // LERP POSITIE NAAR BASKET
         player.transform.position = transform.position - new Vector3(0, 1.4f, 0);
+        player.GetComponent<CharacterController>().enabled = true;
     }
 
     void ExitBasket()

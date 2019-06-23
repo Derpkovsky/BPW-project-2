@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basketEnterRange: 3
   basketEnterSpeed: 0.5
-  enterImage: {fileID: 7644884438265066804}
+  closeToBasket: 0
 --- !u!1 &4758171003286262460
 GameObject:
   m_ObjectHideFlags: 0
