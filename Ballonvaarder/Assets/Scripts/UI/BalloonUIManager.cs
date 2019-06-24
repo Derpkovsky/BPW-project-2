@@ -34,7 +34,7 @@ public class BalloonUIManager : MonoBehaviour
         }
 
 
-        if (lookCheck.windterfaceHit && !stoneScript.isPlaced && stoneScript.isPickedUp)
+        if (lookCheck.windterfaceHit && stoneScript.isPickedUp)
         {
             windterface.SetActive(true);
             //windterface.transform.LookAt(player.transform);
@@ -46,7 +46,7 @@ public class BalloonUIManager : MonoBehaviour
 
 
 
-            if (lookCheck.ropeHit)
+        if (lookCheck.burnRopeHit || lookCheck.ventRopeHit)
         {
             rope.SetActive(true);
             rope.transform.LookAt(player.transform);

@@ -7,7 +7,11 @@ public class RayCastScript : MonoBehaviour
     [HideInInspector]
     public bool windterfaceHit;
     [HideInInspector]
-    public bool ropeHit;
+    public bool burnRopeHit;
+    [HideInInspector]
+    public bool ventRopeHit;
+    float stoneDistanceCheck = 5f;
+
 
     public bool stoneHit;
     public bool CDStoneHit;
@@ -19,8 +23,9 @@ public class RayCastScript : MonoBehaviour
 
 
 
-    Collider windterface;
+    GameObject windterface;
     Collider burnRope;
+    Collider ventRope;
 
     Collider stone;
     Collider CDStone;
@@ -36,8 +41,9 @@ public class RayCastScript : MonoBehaviour
 
     private void Start()
     {
-        windterface = GameObject.Find("curve2").GetComponent<Collider>();
-        burnRope = GameObject.Find("BurnRope").GetComponent<Collider>();
+        windterface = GameObject.FindGameObjectWithTag("Windterface");
+        burnRope = GameObject.FindGameObjectWithTag("BurnRope").GetComponent<Collider>();
+        ventRope = GameObject.FindGameObjectWithTag("VentRope").GetComponent<Collider>();
         stone = GameObject.Find("inputsteen").GetComponent<Collider>();
         CDStone = GameObject.FindGameObjectWithTag("CloudDensityStone").GetComponent<Collider>();
         CHStone = GameObject.FindGameObjectWithTag("CloudHeightStone").GetComponent<Collider>();
@@ -54,7 +60,7 @@ public class RayCastScript : MonoBehaviour
 
 
         //Windterface check
-        if (windterface.Raycast(ray, out hit, 1.7f))
+        if (windterface.GetComponent<Collider>().Raycast(ray, out hit, 1.7f))
         {
             windterfaceHit = true;
         }
@@ -67,11 +73,21 @@ public class RayCastScript : MonoBehaviour
         //Burnrope check
         if (burnRope.Raycast(ray, out hit, 1.5f))
         {
-            ropeHit = true;
+            burnRopeHit = true;
         }
         else
         {
-            ropeHit = false;
+            burnRopeHit = false;
+        }
+
+
+        if (ventRope.Raycast(ray, out hit, 1.5f))
+        {
+            ventRopeHit = true;
+        }
+        else
+        {
+            ventRopeHit = false;
         }
 
 
@@ -87,7 +103,7 @@ public class RayCastScript : MonoBehaviour
 
 
         //Cloud Density steen check
-        if (CDStone.Raycast(ray, out hit, 1.7f))
+        if (CDStone.Raycast(ray, out hit, stoneDistanceCheck))
         {
             CDStoneHit = true;
         }
@@ -98,7 +114,7 @@ public class RayCastScript : MonoBehaviour
 
 
         //Cloud Height steen check
-        if (CHStone.Raycast(ray, out hit, 1.7f))
+        if (CHStone.Raycast(ray, out hit, stoneDistanceCheck))
         {
             CHStoneHit = true;
         }
@@ -109,7 +125,7 @@ public class RayCastScript : MonoBehaviour
 
 
         //Wind Direction steen check
-        if (WDStone.Raycast(ray, out hit, 1.7f))
+        if (WDStone.Raycast(ray, out hit, stoneDistanceCheck))
         {
             WDStoneHit = true;
         }
@@ -120,7 +136,7 @@ public class RayCastScript : MonoBehaviour
 
 
         //Wind Force steen check
-        if (WFStone.Raycast(ray, out hit, 1.7f))
+        if (WFStone.Raycast(ray, out hit, stoneDistanceCheck))
         {
             WFStoneHit = true;
         }
@@ -131,7 +147,7 @@ public class RayCastScript : MonoBehaviour
 
 
         //Sun steen check
-        if (SunStone.Raycast(ray, out hit, 1.7f))
+        if (SunStone.Raycast(ray, out hit, stoneDistanceCheck))
         {
             SunStoneHit = true;
         }
@@ -142,7 +158,7 @@ public class RayCastScript : MonoBehaviour
 
 
         //Start steen check
-        if (StartStone.Raycast(ray, out hit, 1.7f))
+        if (StartStone.Raycast(ray, out hit, stoneDistanceCheck))
         {
             StartStoneHit = true;
         }

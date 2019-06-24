@@ -19,8 +19,11 @@ public class BalloonScript : MonoBehaviour
     public Rigidbody balloonParent;
     InputStoneScript stoneScript;
     CloudDensityScript cloudDensityScript;
+    CloudHeightScript cloudHeightScript;
     WindDirectionScript windDirectionScript;
     WindForceScript windForceScript;
+    SunStoneScript sunStoneScript;
+    StartStoneScript startStoneScript;
 
 
 
@@ -30,6 +33,9 @@ public class BalloonScript : MonoBehaviour
         cloudDensityScript = GameObject.FindGameObjectWithTag("CloudDensityStone").GetComponent<CloudDensityScript>();
         windDirectionScript = GameObject.FindGameObjectWithTag("WindDirectionStone").GetComponent<WindDirectionScript>();
         windForceScript = GameObject.FindGameObjectWithTag("WindForceStone").GetComponent<WindForceScript>();
+        cloudHeightScript = GameObject.FindGameObjectWithTag("CloudHeightStone").GetComponent<CloudHeightScript>();
+        sunStoneScript = GameObject.FindGameObjectWithTag("SunStone").GetComponent<SunStoneScript>();
+        startStoneScript = GameObject.FindGameObjectWithTag("StartStone").GetComponent<StartStoneScript>();
     }
 
 
@@ -37,7 +43,6 @@ public class BalloonScript : MonoBehaviour
 
     void Update()
     {
-
         //verticale beweging
         balloonParent.AddForce(transform.up * upForce);
         if (upForce > stableForce)
@@ -50,12 +55,16 @@ public class BalloonScript : MonoBehaviour
                 upForce = Mathf.Lerp(upForce, stableForce, upForceDiminish * Time.deltaTime);
             }
         }
-
-
-        //horizontale beweging
-        if (windDirectionScript.isPlaced || windForceScript.isPlaced)
+        if (startStoneScript.start)
         {
-            balloonParent.AddForce(windDirectionScript.windDirection * windForceScript.windStrength);
+
+
+
+            //horizontale beweging
+            if (windDirectionScript.isPlaced || windForceScript.isPlaced)
+            {
+                balloonParent.AddForce(windDirectionScript.windDirection * windForceScript.windStrength);
+            }
         }
 
     }

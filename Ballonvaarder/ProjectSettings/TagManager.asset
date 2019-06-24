@@ -14,6 +14,8 @@ TagManager:
   - WindForceStone
   - SunStone
   - StartStone
+  - Windterface
+  - VentRope
   layers:
   - Default
   - TransparentFX
