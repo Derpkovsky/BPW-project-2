@@ -5,6 +5,7 @@ using UnityEngine;
 public class WindForceScript : MonoBehaviour
 {
     public float pickupRange = 2.2f;
+    [Range(1,3)]
     public int force;
 
 
@@ -24,6 +25,7 @@ public class WindForceScript : MonoBehaviour
     public bool isPlaced;
     [HideInInspector]
     bool ableToPickup;
+    private int identifier;
 
 
     void Start()
@@ -32,6 +34,18 @@ public class WindForceScript : MonoBehaviour
         player = GameObject.Find("FPSController");
         rightHand = GameObject.Find("RightHand");
         lookCheck = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RayCastScript>();
+        if (force == 1)
+        {
+            identifier = 1;
+        }
+        else if (force == 2)
+        {
+            identifier = 2;
+        }
+        else
+        {
+            identifier = 3;
+        }
     }
 
     void Update()
@@ -86,11 +100,11 @@ public class WindForceScript : MonoBehaviour
 
         if (isPlaced)
         {
-            windStrength = force;
+            windStrength = identifier;
         }
         else
         {
-            windStrength = 2f;
+            windStrength = 0;
         }
     }
 }

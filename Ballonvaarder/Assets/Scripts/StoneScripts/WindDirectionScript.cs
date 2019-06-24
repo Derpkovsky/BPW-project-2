@@ -21,6 +21,7 @@ public class WindDirectionScript : MonoBehaviour
     public Vector3 wind2;
     [HideInInspector]
     public Vector3 wind3;
+    private Vector3 directionIdentifier;
     [HideInInspector]
     public Vector3 windDirection;
     [HideInInspector]
@@ -40,8 +41,21 @@ public class WindDirectionScript : MonoBehaviour
         wind1 = new Vector3(0, 0, 1);
         wind2 = new Vector3(1, 0, 0);
         wind3 = new Vector3(-1, 0, 0);
-         = direction;
+        if (direction == 1)
+        {
+            directionIdentifier = wind1;
+        }
+        else if (direction == 2)
+        {
+            directionIdentifier = wind2;
+        }
+        else
+        {
+            directionIdentifier = wind3;
+        }
+
     }
+
 
     void Update()
     {
@@ -94,7 +108,7 @@ public class WindDirectionScript : MonoBehaviour
 
         if (isPlaced)
         {
-            windDirection = wind1;
+            windDirection = directionIdentifier;
         }
     }
 }

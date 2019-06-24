@@ -26,6 +26,8 @@ public class SunStoneScript : MonoBehaviour
     [HideInInspector]
     bool ableToPickup;
 
+    private int identifier;
+
 
     void Start()
     {
@@ -33,6 +35,18 @@ public class SunStoneScript : MonoBehaviour
         player = GameObject.Find("FPSController");
         rightHand = GameObject.Find("RightHand");
         lookCheck = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RayCastScript>();
+        if (sun == 1)
+        {
+            identifier = 1;
+        }
+        else if (sun == 2)
+        {
+            identifier = 2;
+        }
+        else
+        {
+            identifier = 3;
+        }
     }
 
     void Update()
@@ -87,7 +101,7 @@ public class SunStoneScript : MonoBehaviour
 
         if (isPlaced)
         {
-            sunStrength = sun;
+            sunStrength = identifier;
         }
         else
         {
