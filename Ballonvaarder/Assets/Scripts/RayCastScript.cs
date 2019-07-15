@@ -20,6 +20,7 @@ public class RayCastScript : MonoBehaviour
     public bool WFStoneHit;
     public bool SunStoneHit;
     public bool StartStoneHit;
+    public bool questGiverHit;
 
 
 
@@ -34,6 +35,7 @@ public class RayCastScript : MonoBehaviour
     Collider WFStone;
     Collider SunStone;
     Collider StartStone;
+    GameObject questGiver;
 
     Ray ray;
     RaycastHit hit;
@@ -51,11 +53,18 @@ public class RayCastScript : MonoBehaviour
         WFStone = GameObject.FindGameObjectWithTag("WindForceStone").GetComponent<Collider>();
         SunStone = GameObject.FindGameObjectWithTag("SunStone").GetComponent<Collider>();
         StartStone = GameObject.FindGameObjectWithTag("StartStone").GetComponent<Collider>();
+        questGiver = GameObject.Find("QuestGiver");
     }
 
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+
         ray = new Ray(transform.position, transform.forward);
 
 
@@ -167,5 +176,14 @@ public class RayCastScript : MonoBehaviour
             StartStoneHit = false;
         }
 
+
+        if (questGiver.GetComponent<Collider>().Raycast(ray, out hit, stoneDistanceCheck))
+        {
+            questGiverHit = true;
+        }
+        else
+        {
+            questGiverHit = false;
+        }
     }
 }

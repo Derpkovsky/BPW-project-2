@@ -16,6 +16,8 @@ TagManager:
   - StartStone
   - Windterface
   - VentRope
+  - Clouds
+  - Balloon
   layers:
   - Default
   - TransparentFX

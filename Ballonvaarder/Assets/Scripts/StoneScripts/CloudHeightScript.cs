@@ -13,17 +13,21 @@ public class CloudHeightScript : MonoBehaviour
     GameObject rightHand;
     GameObject windterface;
     RayCastScript lookCheck;
+    Transform cloudParent;
     public GameObject stonePickupImage;
 
 
+
     [HideInInspector]
-    public float cloudHeight;
-    //[HideInInspector]
     public bool isPickedUp;
-    //[HideInInspector]
+    [HideInInspector]
     public bool isPlaced;
-    //[HideInInspector]
+    [HideInInspector]
     public bool ableToPickup;
+    Vector3 cloudHeight;
+    Vector3 height1;
+    Vector3 height2;
+    Vector3 height3;
 
 
 
@@ -33,6 +37,22 @@ public class CloudHeightScript : MonoBehaviour
         player = GameObject.Find("FPSController");
         rightHand = GameObject.Find("RightHand");
         lookCheck = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RayCastScript>();
+        cloudParent = GameObject.FindGameObjectWithTag("Clouds").GetComponent<Transform>();
+        height1 = new Vector3(0, 100, 0);
+        height2 = new Vector3(0, 200, 0);
+        height3 = new Vector3(0, 400, 0);
+        if (height == 1)
+        {
+            cloudHeight = height1;
+        }
+        else if (height == 2)
+        {
+            cloudHeight = height2;
+        }
+        else
+        {
+            cloudHeight = height3;
+        }
     }
 
     void Update()
@@ -68,8 +88,8 @@ public class CloudHeightScript : MonoBehaviour
                     {
                         transform.SetParent(windterface.GetComponent<Transform>());
                         GetComponent<Collider>().enabled = true;
-                        transform.position = windterface.GetComponent<Transform>().GetChild(1).transform.position;
-                        transform.rotation = windterface.GetComponent<Transform>().GetChild(1).transform.rotation;
+                        transform.position = windterface.transform.Find("CloudHeightPos").transform.position;
+                        transform.rotation = windterface.transform.Find("CloudHeightPos").transform.rotation;
                         isPlaced = true;
                         isPickedUp = false;
                     }
@@ -87,11 +107,11 @@ public class CloudHeightScript : MonoBehaviour
 
         if (isPlaced)
         {
-            cloudHeight = height;
+            cloudParent.position = cloudHeight;
         }
         else
         {
-            cloudHeight = 2;
+            cloudHeight = height1;
         }
     }
 }

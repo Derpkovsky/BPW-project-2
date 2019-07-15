@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class BalloonScript : MonoBehaviour
@@ -12,10 +13,13 @@ public class BalloonScript : MonoBehaviour
 
 
     //state trackers
-    private float stableForce = 417;
+    private float stableForce = 425;
+    GameObject[] stonesPlaced;
 
 
     //imports
+    Rigidbody playerRB;
+    BasketScript basketScript;
     public Rigidbody balloonParent;
     InputStoneScript stoneScript;
     CloudDensityScript cloudDensityScript;
@@ -36,6 +40,8 @@ public class BalloonScript : MonoBehaviour
         cloudHeightScript = GameObject.FindGameObjectWithTag("CloudHeightStone").GetComponent<CloudHeightScript>();
         sunStoneScript = GameObject.FindGameObjectWithTag("SunStone").GetComponent<SunStoneScript>();
         startStoneScript = GameObject.FindGameObjectWithTag("StartStone").GetComponent<StartStoneScript>();
+        playerRB = GameObject.Find("FPSController").GetComponent<Rigidbody>();
+        basketScript = GameObject.Find("basket").GetComponent<BasketScript>();
     }
 
 
@@ -45,6 +51,7 @@ public class BalloonScript : MonoBehaviour
     {
         //verticale beweging
         balloonParent.AddForce(transform.up * upForce);
+
         if (upForce > stableForce)
         {
 
@@ -57,14 +64,18 @@ public class BalloonScript : MonoBehaviour
         }
         if (startStoneScript.start)
         {
-
-
-
+            balloonParent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            balloonParent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             //horizontale beweging
             if (windDirectionScript.isPlaced || windForceScript.isPlaced)
             {
                 balloonParent.AddForce(windDirectionScript.windDirection * windForceScript.windStrength);
+                Debug.Log("windfore is active");
             }
+        }
+        else
+        {
+            balloonParent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         }
 
     }

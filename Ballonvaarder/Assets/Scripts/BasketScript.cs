@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BasketScript : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class BasketScript : MonoBehaviour
     public float basketEnterSpeed;
 
     //STATE TRACKERS
-    bool inBasket;
+    public bool inBasket;
     bool clicking;
     public bool closeToBasket;
+    bool moveFrozenY;
     Vector3 playerStartPos;
 
 
@@ -27,6 +29,7 @@ public class BasketScript : MonoBehaviour
 
     void Update()
     {
+
         if (Vector3.Distance(player.GetComponent<Transform>().position, transform.position) <= basketEnterRange)
         {
             closeToBasket = true;
@@ -35,9 +38,7 @@ public class BasketScript : MonoBehaviour
                 closeToBasket = false;
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    player.GetComponent<CharacterController>().enabled = false;
                     ExitBasket();
-                    player.GetComponent<CharacterController>().enabled = true;
                 }
             }
             else
@@ -51,6 +52,11 @@ public class BasketScript : MonoBehaviour
         else
         {
             closeToBasket = false;
+        }
+
+        if (moveFrozenY)
+        {
+            //player.GetComponent<Transform>().SetParent(transform);
         }
 
 
@@ -75,17 +81,22 @@ public class BasketScript : MonoBehaviour
     void EnterBasket()
     {
         player.GetComponent<CharacterController>().enabled = false;
+        player.GetComponent<PlatformFollow>().Platform = transform;
+        //player.GetComponent<Rigidbody>().isKinematic = false;
+        //player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+        //moveFrozenY = true;
         inBasket = true;
-        // LERP POSITIE NAAR BASKET
         player.transform.position = transform.position - new Vector3(0, 1.4f, 0);
         player.GetComponent<CharacterController>().enabled = true;
     }
 
     void ExitBasket()
     {
+        player.GetComponent<CharacterController>().enabled = false;
+        //player.GetComponent<Rigidbody>().isKinematic = true;
         inBasket = false;
-        //LERP SPELER UIT DE BASKET
         player.transform.position += player.GetComponent<Transform>().GetChild(0).transform.forward * 2;
+        player.GetComponent<CharacterController>().enabled = true;
     }
 }
 

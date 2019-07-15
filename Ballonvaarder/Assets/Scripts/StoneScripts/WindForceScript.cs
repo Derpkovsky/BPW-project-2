@@ -36,15 +36,15 @@ public class WindForceScript : MonoBehaviour
         lookCheck = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RayCastScript>();
         if (force == 1)
         {
-            identifier = 1;
+            identifier = 50;
         }
         else if (force == 2)
         {
-            identifier = 2;
+            identifier = 100;
         }
         else
         {
-            identifier = 3;
+            identifier = 200;
         }
     }
 
@@ -81,8 +81,8 @@ public class WindForceScript : MonoBehaviour
                     {
                         transform.SetParent(windterface.GetComponent<Transform>());
                         GetComponent<Collider>().enabled = true;
-                        transform.position = windterface.GetComponent<Transform>().GetChild(3).transform.position;
-                        transform.rotation = windterface.GetComponent<Transform>().GetChild(3).transform.rotation;
+                        transform.position = windterface.transform.Find("WindForcePos").transform.position;
+                        transform.rotation = windterface.transform.Find("WindForcePos").transform.rotation;
                         isPlaced = true;
                         isPickedUp = false;
                     }

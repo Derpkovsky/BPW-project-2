@@ -82,8 +82,8 @@ public class SunStoneScript : MonoBehaviour
                     {
                         transform.SetParent(windterface.GetComponent<Transform>());
                         GetComponent<Collider>().enabled = true;
-                        transform.position = windterface.GetComponent<Transform>().GetChild(3).transform.position;
-                        transform.rotation = windterface.GetComponent<Transform>().GetChild(3).transform.rotation;
+                        transform.position = windterface.transform.Find("SunStonePos").transform.position;
+                        transform.rotation = windterface.transform.Find("SunStonePos").transform.rotation;
                         isPlaced = true;
                         isPickedUp = false;
                     }

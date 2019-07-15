@@ -21,7 +21,7 @@ public class WindDirectionScript : MonoBehaviour
     public Vector3 wind2;
     [HideInInspector]
     public Vector3 wind3;
-    private Vector3 directionIdentifier;
+    private Vector3 identifier;
     [HideInInspector]
     public Vector3 windDirection;
     [HideInInspector]
@@ -39,19 +39,19 @@ public class WindDirectionScript : MonoBehaviour
         rightHand = GameObject.Find("RightHand");
         lookCheck = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RayCastScript>();
         wind1 = new Vector3(0, 0, 1);
-        wind2 = new Vector3(1, 0, 0);
-        wind3 = new Vector3(-1, 0, 0);
+        wind2 = new Vector3(1, 0, -0.333333333333f);
+        wind3 = new Vector3(-1, 0, -0.33333333333f);
         if (direction == 1)
         {
-            directionIdentifier = wind1;
+            identifier = wind1;
         }
         else if (direction == 2)
         {
-            directionIdentifier = wind2;
+            identifier = wind2;
         }
         else
         {
-            directionIdentifier = wind3;
+            identifier = wind3;
         }
 
     }
@@ -90,8 +90,8 @@ public class WindDirectionScript : MonoBehaviour
                     {
                         transform.SetParent(windterface.GetComponent<Transform>());
                         GetComponent<Collider>().enabled = true;
-                        transform.position = windterface.GetComponent<Transform>().GetChild(2).transform.position;
-                        transform.rotation = windterface.GetComponent<Transform>().GetChild(2).transform.rotation;
+                        transform.position = windterface.transform.Find("WindDirectionPos").transform.position;
+                        transform.rotation = windterface.transform.Find("WindDirectionPos").transform.rotation;
                         isPlaced = true;
                         isPickedUp = false;
                     }
@@ -108,7 +108,7 @@ public class WindDirectionScript : MonoBehaviour
 
         if (isPlaced)
         {
-            windDirection = directionIdentifier;
+            windDirection = identifier;
         }
     }
 }

@@ -65,8 +65,8 @@ public class StartStoneScript : MonoBehaviour
                     {
                         transform.SetParent(windterface.GetComponent<Transform>());
                         GetComponent<Collider>().enabled = true;
-                        transform.position = windterface.GetComponent<Transform>().GetChild(4).transform.position;
-                        transform.rotation = windterface.GetComponent<Transform>().GetChild(4).transform.rotation;
+                        transform.position = windterface.transform.Find("StartStonePos").transform.position;
+                        transform.rotation = windterface.transform.Find("StartStonePos").transform.rotation;
                         isPlaced = true;
                         isPickedUp = false;
                     }

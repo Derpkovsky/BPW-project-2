@@ -24,7 +24,8 @@ public class CloudDensityScript : MonoBehaviour
     public bool isPlaced;
     [HideInInspector]
     bool ableToPickup;
-
+    [HideInInspector]
+    private int identifier;
 
 
     void Start()
@@ -33,6 +34,18 @@ public class CloudDensityScript : MonoBehaviour
         player = GameObject.Find("FPSController");
         rightHand = GameObject.Find("RightHand");
         lookCheck = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RayCastScript>();
+        if (density == 1)
+        {
+            identifier = 1;
+        }
+        else if (density == 2)
+        {
+            identifier = 2;
+        }
+        else
+        {
+            identifier = 3;
+        }
     }
 
     void Update()
@@ -68,8 +81,8 @@ public class CloudDensityScript : MonoBehaviour
                     {
                         transform.SetParent(windterface.GetComponent<Transform>());
                         GetComponent<Collider>().enabled = true;
-                        transform.position = windterface.GetComponent<Transform>().GetChild(0).transform.position;
-                        transform.rotation = windterface.GetComponent<Transform>().GetChild(0).transform.rotation;
+                        transform.position = windterface.transform.Find("CloudDensityPos").transform.position;
+                        transform.rotation = windterface.transform.Find("CloudDensityPos").transform.rotation;
                         isPlaced = true;
                         isPickedUp = false;
                     }
