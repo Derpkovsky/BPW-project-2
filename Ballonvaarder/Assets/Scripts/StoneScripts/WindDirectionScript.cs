@@ -99,6 +99,7 @@ public class WindDirectionScript : MonoBehaviour
                     {
                         GetComponent<Collider>().enabled = true;
                         GetComponent<Rigidbody>().isKinematic = false;
+                        GetComponent<Rigidbody>().AddForce(player.transform.forward * 2);
                         transform.SetParent(null);
                         isPickedUp = false;
                     }

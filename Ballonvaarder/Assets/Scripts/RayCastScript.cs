@@ -46,7 +46,6 @@ public class RayCastScript : MonoBehaviour
         windterface = GameObject.FindGameObjectWithTag("Windterface");
         burnRope = GameObject.FindGameObjectWithTag("BurnRope").GetComponent<Collider>();
         ventRope = GameObject.FindGameObjectWithTag("VentRope").GetComponent<Collider>();
-        stone = GameObject.Find("inputsteen").GetComponent<Collider>();
         CDStone = GameObject.FindGameObjectWithTag("CloudDensityStone").GetComponent<Collider>();
         CHStone = GameObject.FindGameObjectWithTag("CloudHeightStone").GetComponent<Collider>();
         WDStone = GameObject.FindGameObjectWithTag("WindDirectionStone").GetComponent<Collider>();
@@ -90,6 +89,7 @@ public class RayCastScript : MonoBehaviour
         }
 
 
+        //Ventrope check
         if (ventRope.Raycast(ray, out hit, 1.5f))
         {
             ventRopeHit = true;
@@ -97,17 +97,6 @@ public class RayCastScript : MonoBehaviour
         else
         {
             ventRopeHit = false;
-        }
-
-
-        //Standaard steen check
-        if (stone.Raycast(ray, out hit, 10))
-        {
-            stoneHit = true;
-        }
-        else
-        {
-            stoneHit = false;
         }
 
 

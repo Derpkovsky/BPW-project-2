@@ -95,7 +95,7 @@ public class BasketScript : MonoBehaviour
         player.GetComponent<CharacterController>().enabled = false;
         //player.GetComponent<Rigidbody>().isKinematic = true;
         inBasket = false;
-        player.transform.position += player.GetComponent<Transform>().GetChild(0).transform.forward * 2;
+        player.transform.position += player.GetComponent<Transform>().GetChild(0).transform.forward * 3;
         player.GetComponent<CharacterController>().enabled = true;
     }
 }

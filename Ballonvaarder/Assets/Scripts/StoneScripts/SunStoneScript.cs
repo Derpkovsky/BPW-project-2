@@ -80,19 +80,23 @@ public class SunStoneScript : MonoBehaviour
                 {
                     if (lookCheck.windterfaceHit)
                     {
+                        isPlaced = true;
+                        isPickedUp = false;
                         transform.SetParent(windterface.GetComponent<Transform>());
                         GetComponent<Collider>().enabled = true;
                         transform.position = windterface.transform.Find("SunStonePos").transform.position;
                         transform.rotation = windterface.transform.Find("SunStonePos").transform.rotation;
-                        isPlaced = true;
-                        isPickedUp = false;
+
                     }
                     else
                     {
+                        isPickedUp = false;
+
                         GetComponent<Collider>().enabled = true;
                         GetComponent<Rigidbody>().isKinematic = false;
+                        GetComponent<Rigidbody>().AddForce(player.transform.forward * 2);
                         transform.SetParent(null);
-                        isPickedUp = false;
+
                     }
                 }
             }
