@@ -6,24 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SampleScene.unity
+    path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/HillArea.unity
+    path: Assets/Scenes/HillArea.unity
     guid: 643b92cd53d544e4e9c3041c4c49036e
   - enabled: 1
-    path: Assets/RockyArea.unity
+    path: Assets/Scenes/RockyArea.unity
     guid: a11475634e2fde74f8ef464f2dd37653
   - enabled: 1
-    path: Assets/SkyArea.unity
+    path: Assets/Scenes/SkyArea.unity
     guid: c179c0adae1d4b742b7f30d954e7baa0
   - enabled: 1
-    path: Assets/SpaceScene.unity
+    path: Assets/Scenes/SpaceScene.unity
     guid: bfcbe65f18e0694419f584911dcff5fb
   - enabled: 1
-    path: Assets/TopScene.unity
+    path: Assets/Scenes/TopScene.unity
     guid: 16d056ff8c3a5f648b8eb434468ee8ae
   - enabled: 1
-    path: Assets/WaterScene.unity
+    path: Assets/Scenes/WaterScene.unity
     guid: 1ffaf4cc9f90a794ea9dd95fb230dab1
   m_configObjects: {}

@@ -7,6 +7,7 @@ public class QuestGiver : MonoBehaviour
     GameObject lookCheck;
     public GameObject talkButton;
     public GameObject questText;
+    public GameObject questTextBackground;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class QuestGiver : MonoBehaviour
             {
                 Debug.Log("quest");
                 questText.SetActive(true);
+                questTextBackground.SetActive(true);
                 StartCoroutine(talkTimer());
 
             }
@@ -42,5 +44,6 @@ public class QuestGiver : MonoBehaviour
     {
         yield return new WaitForSeconds(20);
         questText.SetActive(false);
+        questTextBackground.SetActive(false);
     }
 }
